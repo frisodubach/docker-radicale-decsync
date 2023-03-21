@@ -1,4 +1,4 @@
-FROM alpine:3.17.2
+FROM frolvlad/alpine-glibc:3.17
 
 ARG COMMIT_ID
 ENV COMMIT_ID ${COMMIT_ID}
@@ -21,7 +21,7 @@ LABEL maintainer="Thomas Queste <tom@tomsquest.com>" \
       org.label-schema.url="https://github.com/Kozea/Radicale" \
       org.label-schema.version=$VERSION \
       org.label-schema.vcs-ref=$COMMIT_ID \
-      org.label-schema.vcs-url="https://github.com/tomsquest/docker-radicale" \
+      org.label-schema.vcs-url="httpts://github.com/tomsquest/docker-radicale" \
       org.label-schema.schema-version="1.0"
 
 RUN apk add --no-cache --virtual=build-dependencies \
@@ -42,6 +42,7 @@ RUN apk add --no-cache --virtual=build-dependencies \
         py3-pip \
     && python3 -m pip install --upgrade pip \
     && python3 -m pip install radicale==$VERSION passlib[bcrypt] \
+    && python3 -m pip install radicale_storage_decsync
     && apk del --purge build-dependencies \
     && addgroup -g $BUILD_GID radicale \
     && adduser -D -s /bin/false -H -u $BUILD_UID -G radicale radicale \
