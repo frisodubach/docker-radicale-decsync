@@ -1,4 +1,4 @@
-FROM frolvlad/alpine-glibc:3.17
+FROM frolvlad/alpine-glibc:alpine-3.17
 
 ARG COMMIT_ID
 ENV COMMIT_ID ${COMMIT_ID}
