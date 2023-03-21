@@ -89,7 +89,9 @@ hosts = 0.0.0.0:5232
 
 # Folder for storing local collections, created if not present
 #filesystem_folder = /var/lib/radicale/collections
+type = radicale_storage_decsync
 filesystem_folder = /data/collections
+decsync_dir = /data/decsync
 
 # Delete sync token that are older (seconds)
 #max_sync_token_age = 2592000
