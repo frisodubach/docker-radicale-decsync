@@ -42,7 +42,7 @@ RUN apk add --no-cache --virtual=build-dependencies \
         py3-pip \
     && python3 -m pip install --upgrade pip \
     && python3 -m pip install radicale==$VERSION passlib[bcrypt] \
-    && python3 -m pip install radicale_storage_decsync
+    && python3 -m pip install radicale_storage_decsync \
     && apk del --purge build-dependencies \
     && addgroup -g $BUILD_GID radicale \
     && adduser -D -s /bin/false -H -u $BUILD_UID -G radicale radicale \
