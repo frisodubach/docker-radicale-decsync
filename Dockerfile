@@ -1,4 +1,5 @@
-FROM frolvlad/alpine-glibc:alpine-3.17
+FROM bitnami/minideb:bullseye
+
 
 ARG COMMIT_ID
 ENV COMMIT_ID ${COMMIT_ID}
@@ -21,31 +22,25 @@ LABEL maintainer="Thomas Queste <tom@tomsquest.com>" \
       org.label-schema.url="https://github.com/Kozea/Radicale" \
       org.label-schema.version=$VERSION \
       org.label-schema.vcs-ref=$COMMIT_ID \
-      org.label-schema.vcs-url="httpts://github.com/tomsquest/docker-radicale" \
+      org.label-schema.vcs-url="https://github.com/tomsquest/docker-radicale" \
       org.label-schema.schema-version="1.0"
 
-RUN apk add --no-cache --virtual=build-dependencies \
-        gcc \
-        musl-dev \
-        libffi-dev \
-        python3-dev \
-    && apk add --no-cache \
-        curl \
+RUN install_packages curl \
         git \
-        openssh \
-        shadow \
-        su-exec \
-        tzdata \
+        openssh-server \
         wget \
+        python3-tz \
+        python3-pip \
         python3 \
-        py3-tz \
-        py3-pip \
-    && python3 -m pip install --upgrade pip \
-    && python3 -m pip install radicale==$VERSION passlib[bcrypt] \
-    && python3 -m pip install radicale_storage_decsync \
-    && apk del --purge build-dependencies \
-    && addgroup -g $BUILD_GID radicale \
-    && adduser -D -s /bin/false -H -u $BUILD_UID -G radicale radicale \
+RUN install_packages gcc \
+        python3-dev \
+        libffi-dev \
+        libc-dev-bin\
+RUN python3 -m pip install --upgrade pip\
+    && python3 -m pip install radicale==$VERSION passlib[becrypt] \
+RUN apt-get remove gcc python3-dev libffi-dev libc-dev-bin -y
+RUN addgroup --gid $BUILD_GID radicale\
+    && adduser --disabled-password --disabled-login --shell /bin/false --no-create-home --uid 2999 --ingroup radicale radicale \
     && mkdir -p /config /data \
     && chmod -R 770 /data \
     && chown -R radicale:radicale /data \
