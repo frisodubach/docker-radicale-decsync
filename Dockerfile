@@ -31,13 +31,13 @@ RUN install_packages curl \
         wget \
         python3-tz \
         python3-pip \
-        python3 \
+        python3
 RUN install_packages gcc \
         python3-dev \
         libffi-dev \
-        libc-dev-bin\
+        libc-dev-bin
 RUN python3 -m pip install --upgrade pip\
-    && python3 -m pip install radicale==$VERSION passlib[becrypt] \
+    && python3 -m pip install radicale==$VERSION passlib[becrypt]
 RUN apt-get remove gcc python3-dev libffi-dev libc-dev-bin -y
 RUN addgroup --gid $BUILD_GID radicale\
     && adduser --disabled-password --disabled-login --shell /bin/false --no-create-home --uid 2999 --ingroup radicale radicale \
