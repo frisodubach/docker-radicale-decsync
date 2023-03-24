@@ -28,6 +28,7 @@ LABEL maintainer="Thomas Queste <tom@tomsquest.com>" \
 RUN install_packages curl \
         git \
         openssh-server \
+        gosu \
         wget \
         python3-tz \
         python3-pip \
