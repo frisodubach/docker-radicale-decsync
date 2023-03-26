@@ -27,3 +27,5 @@ services:
     restart: unless-stopped
     volumes:
       - ./data:/data
+    environment:
+      - TAKE_FILE_OWNERSHIP=false
