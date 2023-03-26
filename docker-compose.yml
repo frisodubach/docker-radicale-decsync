@@ -5,7 +5,7 @@ version: '3.7'
 
 services:
   radicale:
-    image: tomsquest/docker-radicale
+    image: ffcdubach/radicale-decsync
     container_name: radicale
     ports:
       - 127.0.0.1:5232:5232
