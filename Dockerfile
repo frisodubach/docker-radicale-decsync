@@ -38,8 +38,8 @@ RUN install_packages gcc \
         libffi-dev \
         libc-dev-bin
 
-RUN python3 -m pip install --upgrade pip\
-    && python3 -m pip install radicale==$VERSION passlib[becrypt]
+RUN python3 -m pip install --upgrade pip \
+    && python3 -m pip install radicale==$VERSION passlib[becrypt] \
     && pip3 install radicale_storage_decsync
 RUN mkdir -p /data/decsync
 
